@@ -7,6 +7,8 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+# from local_settings import SCRAPEOPS_API_KEY
+
 BOT_NAME = "bookscraper"
 
 SPIDER_MODULES = ["bookscraper.spiders"]
@@ -23,7 +25,7 @@ NEWSPIDER_MODULE = "bookscraper.spiders"
 #USER_AGENT = "bookscraper (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -60,6 +62,16 @@ ROBOTSTXT_OBEY = True
 #    "bookscraper.middlewares.BookscraperDownloaderMiddleware": 543,
 #}
 
+SCRAPEOPS_API_KEY = 'YOUR_SCRAPEOPS_API_KEY'
+SCRAPEOPS_FAKE_BROWSER_HEADER_ENABLED = True
+SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
+SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
+SCRAPEOPS_NUM_RESULTS = 5
+
+DOWNLOADER_MIDDLEWARES = {
+    'bookscraper.middlewares.ScrapeOpsFakeBrowserHeaderAgentMiddleware': 400,
+}
+
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
@@ -70,7 +82,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    "bookscraper.pipelines.BookscraperPipeline": 300,
-   'bookscraper.pipelines.SaveToMySQLPipeline': 301,
+#    'bookscraper.pipelines.SaveToMySQLPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

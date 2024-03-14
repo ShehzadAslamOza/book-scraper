@@ -2,3 +2,4 @@ scrapy
 ipython
 mysql 
 mysql-connector-python
+requests
